@@ -1,0 +1,6 @@
+{
+  "name": "Morena Web Rádio",
+  "description": "A rádio que toca o melhor do pop global. Ouça ao vivo de qualquer lugar com transmissão em alta qualidade.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

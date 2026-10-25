@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    /* Compatibility fix for browser extensions / test runners that patch window.fetch */
+    (function() {
+      try {
+        var _fetch = typeof window !== 'undefined' && window.fetch ? window.fetch.bind(window) : undefined;
+        var desc = {
+          get: function() { return _fetch; },
+          set: function(fn) { _fetch = fn; },
+          configurable: true,
+          enumerable: true
+        };
+        try { Object.defineProperty(window, 'fetch', desc); } catch (e) {}
+        if (typeof Window !== 'undefined' && Window.prototype) {
+          try { Object.defineProperty(Window.prototype, 'fetch', desc); } catch (e) {}
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morena Web Rádio | A Rádio que Toca o Melhor do Pop Global</title>
+  <meta name="description" content="A rádio que toca o melhor do pop global. Ouça ao vivo de qualquer lugar com transmissão em alta qualidade e programação 24 horas.">
+  <meta property="og:title" content="Morena Web Rádio | A Rádio que Toca o Melhor do Pop Global">
+  <meta property="og:description" content="A rádio que toca o melhor do pop global. Ouça ao vivo de qualquer lugar com transmissão digital 24h.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23db2777'/><stop offset='100%' stop-color='%239d174d'/></linearGradient></defs><circle cx='50' cy='50' r='46' fill='%23080206' stroke='url(%23g)' stroke-width='6'/><path d='M38 32v36l30-18z' fill='url(%23g)'/></svg>">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      /* Rosa Escuro (Dark Pink / Magenta Profundo) */
+      --color-pink-primary: #be185d;
+      --color-pink-dark: #831843;
+      --color-pink-deep: #4c0529;
+      --color-pink-vibrant: #ec4899;
+      --color-pink-glow: rgba(190, 24, 93, 0.4);
+      --color-pink-subtle: rgba(190, 24, 93, 0.12);
+      
+      /* Preto e Tons Profundos */
+      --color-black-base: #060205;
+      --color-black-surface: #0e040b;
+      --color-black-card: #150711;
+      --color-black-card-hover: #1e0b19;
+      --color-black-btn: #000000;
+      
+      /* Linhas e Bordas */
+      --color-border: rgba(255, 255, 255, 0.09);
+      --color-border-pink: rgba(190, 24, 93, 0.35);
+      
+      /* Tipografia */
+      --color-text-main: #ffffff;
+      --color-text-muted: #d4b8ca;
+      --color-text-dim: #99788e;
+      
+      /* Destaques */
+      --color-whatsapp: #25d366;
+      --color-whatsapp-dark: #128c7e;
+
+      /* Fontes */
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      /* Sombras Suaves */
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-card: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 24px -10px rgba(190, 24, 93, 0.25);
+      --shadow-card-hover: 0 22px 48px -10px rgba(0, 0, 0, 0.8), 0 0 32px -6px rgba(236, 72, 153, 0.35);
+      --shadow-btn: 0 8px 24px -6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-black-base);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(190, 24, 93, 0.22) 0%, transparent 40%),
+        radial-gradient(circle at 90% 45%, rgba(131, 24, 67, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 30% 85%, rgba(190, 24, 93, 0.16) 0%, transparent 50%),
+        linear-gradient(180deg, #070206 0%, #11030d 35%, #080207 70%, #030003 100%);
+      background-attachment: fixed;
+      color: var(--color-text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-black-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4c0529;
+      border-radius: 5px;
+      border: 2px solid var(--color-black-base);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-pink-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+    }
+
+    /* ==========================================================================
+       3. UTILITIES & CONTAINER
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .section-spacing {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    @media (min-width: 768px) {
+      .section-spacing {
+        padding-top: 110px;
+        padding-bottom: 110px;
+      }
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--color-pink-vibrant);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 16px;
+      text-wrap: balance;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ==========================================================================
+       4. HEADER & NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 2, 8, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(190, 24, 93, 0.25);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 20px;
+    }
+
+    /* Logo */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-symbol {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--color-pink-primary), #4c0529);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(190, 24, 93, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .logo-symbol svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .brand-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .brand-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-pink-vibrant);
+    }
+
+    /* Nav Links */
+    .nav-menu {
+      display: none;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    @media (min-width: 992px) {
+      .nav-menu {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      position: relative;
+      padding: 6px 0;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #ffffff;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-pink-primary);
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-black-btn);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-whatsapp svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--color-whatsapp);
+    }
+
+    .btn-whatsapp:hover {
+      background: #111116;
+      border-color: var(--color-whatsapp);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+      color: #ffffff;
+    }
+
+    /* Mobile Hamburger */
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 42px;
+      height: 42px;
+      background: var(--color-black-card);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 0;
+      color: #ffffff;
+    }
+
+    @media (min-width: 992px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: absolute;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: rgba(14, 4, 11, 0.98);
+      border-bottom: 1px solid var(--color-border-pink);
+      padding: 24px 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      backdrop-filter: blur(20px);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mobile-nav-link {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-nav-link:hover, .mobile-nav-link.active {
+      color: var(--color-pink-vibrant);
+      padding-left: 8px;
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION & INTEGRATED PLAYER
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding-top: 50px;
+      padding-bottom: 70px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(190, 24, 93, 0.15);
+    }
+
+    /* Background image with subtle overlay */
+    .hero-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: 
+        linear-gradient(180deg, rgba(6, 2, 5, 0.85) 0%, rgba(14, 4, 11, 0.92) 50%, rgba(6, 2, 5, 1) 100%),
+        url('/src/assets/images/hero_radio_studio_1792925740944.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.38;
+      filter: saturate(1.2) contrast(1.1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.95fr;
+        gap: 48px;
+      }
+    }
+
+    .live-broadcast-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(190, 24, 93, 0.18);
+      border: 1px solid rgba(190, 24, 93, 0.4);
+      color: #ff9ec7;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ef4444;
+      animation: livePulse 1.8s infinite;
+    }
+
+    @keyframes livePulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px #ef4444; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+
+    .hero-headline span.highlight {
+      background: linear-gradient(135deg, #ffffff 0%, #ff9ec7 50%, var(--color-pink-vibrant) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      margin-bottom: 32px;
+      max-width: 580px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-black-btn);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      border: 1px solid var(--color-pink-primary);
+      box-shadow: var(--shadow-btn), 0 0 20px rgba(190, 24, 93, 0.35);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-pink-primary);
+      border-color: var(--color-pink-vibrant);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -4px rgba(190, 24, 93, 0.55);
+    }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Trust / Features Mini Strip */
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--color-text-dim);
+    }
+
+    .hero-badge-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-pink-vibrant);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       6. EMBEDDED PLAYER CARD (Zeno.FM Player)
+       ========================================================================== */
+    .player-card-container {
+      background: linear-gradient(145deg, rgba(26, 7, 21, 0.95) 0%, rgba(14, 4, 11, 0.98) 100%);
+      border: 1px solid var(--color-border-pink);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-card-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-pink-vibrant) 50%, transparent 100%);
+    }
+
+    .player-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .player-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+    }
+
+    .player-card-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-pink-vibrant);
+    }
+
+    .equalizer-anim {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: var(--color-pink-vibrant);
+      border-radius: 2px;
+      animation: eqBounce 1.2s infinite ease-in-out;
+    }
+
+    .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .eq-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+    .eq-bar:nth-child(5) { height: 50%; animation-delay: 0.15s; }
+
+    @keyframes eqBounce {
+      0%, 100% { height: 25%; }
+      50% { height: 100%; }
+    }
+
+    /* Player Iframe Wrapper (Fully Responsive) */
+    .player-embed-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Exact embed provided by the user with responsive constraints */
+    .player-embed-wrapper iframe {
+      width: 100%;
+      max-width: 575px;
+      height: 250px;
+      border: 0;
+      display: block;
+    }
+
+    .player-embed-wrapper a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      padding: 6px 12px;
+      background: #080206;
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      transition: color 0.2s ease;
+    }
+
+    .player-embed-wrapper a:hover {
+      color: var(--color-pink-vibrant);
+    }
+
+    .player-extra-bar {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .status-text-highlight {
+      color: var(--color-pink-vibrant);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       7. PROGRAMAÇÃO SECTION (Grade de Horários)
+       ========================================================================== */
+    .program-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--color-black-btn);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      border-color: rgba(190, 24, 93, 0.4);
+    }
+
+    .tab-btn.active {
+      background: var(--color-pink-primary);
+      color: #ffffff;
+      border-color: var(--color-pink-vibrant);
+      box-shadow: 0 4px 16px rgba(190, 24, 93, 0.4);
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .schedule-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .program-card {
+      background: var(--color-black-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-border-pink);
+      box-shadow: var(--shadow-card-hover);
+      background: var(--color-black-card-hover);
+    }
+
+    .program-card.is-live {
+      border-color: var(--color-pink-vibrant);
+      background: linear-gradient(145deg, #240a1c 0%, #150711 100%);
+      box-shadow: 0 8px 30px rgba(190, 24, 93, 0.3);
+    }
+
+    .program-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .program-time {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-pink-vibrant);
+      letter-spacing: 0.04em;
+    }
+
+    .program-badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #ef4444;
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .program-title {
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .program-desc {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .program-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.84rem;
+      color: var(--color-text-dim);
+    }
+
+    .program-host {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .program-host svg {
+      width: 14px;
+      height: 14px;
+      color: var(--color-pink-primary);
+    }
+
+    /* ==========================================================================
+       8. SOBRE SECTION (Apresentação Institucional)
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+      }
+    }
+
+    .about-card-panel {
+      background: linear-gradient(145deg, #180614 0%, #0c030a 100%);
+      border: 1px solid var(--color-border-pink);
+      border-radius: 20px;
+      padding: 36px 30px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    .about-lead {
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .about-text {
+      color: var(--color-text-muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--color-pink-vibrant);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--color-text-dim);
+      font-weight: 500;
+    }
+
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: var(--color-black-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 22px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--color-border-pink);
+      transform: translateX(4px);
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(190, 24, 93, 0.15);
+      border: 1px solid rgba(190, 24, 93, 0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-pink-vibrant);
+    }
+
+    .pillar-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .pillar-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       9. TOP 5 POP GLOBAL (Destaques Musicais)
+       ========================================================================== */
+    .top-tracks-list {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .track-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--color-black-card);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .track-card:hover {
+      background: var(--color-black-card-hover);
+      border-color: var(--color-border-pink);
+      transform: scale(1.01);
+    }
+
+    .track-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .track-rank {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .track-card:nth-child(1) .track-rank {
+      background: linear-gradient(135deg, var(--color-pink-primary), #4c0529);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(190, 24, 93, 0.5);
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .track-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #ffffff;
+    }
+
+    .track-artist {
+      font-size: 0.88rem;
+      color: var(--color-pink-vibrant);
+    }
+
+    .track-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-vote {
+      background: var(--color-black-btn);
+      border: 1px solid rgba(190, 24, 93, 0.4);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-vote:hover {
+      background: var(--color-pink-primary);
+      border-color: var(--color-pink-vibrant);
+    }
+
+    .btn-vote svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--color-pink-vibrant);
+    }
+
+    .btn-vote:hover svg {
+      fill: #ffffff;
+    }
+
+    /* ==========================================================================
+       10. PEDIDO DE MÚSICA & INTERATIVIDADE
+       ========================================================================== */
+    .request-section-card {
+      background: linear-gradient(145deg, #1c0717 0%, #0d020a 100%);
+      border: 1px solid var(--color-border-pink);
+      border-radius: 24px;
+      padding: 36px 24px;
+      box-shadow: var(--shadow-card);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .request-section-card {
+        padding: 48px;
+      }
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .form-input, .form-textarea {
+      background: #080206;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--color-pink-vibrant);
+      box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.25);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-submit-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* Toast Notification */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      background: #190514;
+      border: 1px solid var(--color-pink-vibrant);
+      color: #ffffff;
+      padding: 16px 22px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      gap: 12px;
+      animation: toastIn 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ==========================================================================
+       11. CONTATOS SECTION
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .contact-card {
+      background: var(--color-black-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-card:hover {
+      border-color: var(--color-border-pink);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .contact-icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: rgba(190, 24, 93, 0.15);
+      border: 1px solid rgba(190, 24, 93, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--color-pink-vibrant);
+    }
+
+    .contact-icon-wrap svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .contact-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .contact-card-text {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      margin-bottom: 18px;
+    }
+
+    .contact-btn-link {
+      margin-top: auto;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-pink-vibrant);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-btn-link:hover {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       12. FOOTER SECTION
+       ========================================================================== */
+    .site-footer {
+      background: #040103;
+      border-top: 1px solid rgba(190, 24, 93, 0.25);
+      padding-top: 60px;
+      padding-bottom: 40px;
+      color: var(--color-text-dim);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 48px;
+      }
+    }
+
+    .footer-desc {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      margin-top: 14px;
+      max-width: 360px;
+      line-height: 1.6;
+    }
+
+    .footer-heading {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-link {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .footer-nav-link:hover {
+      color: var(--color-pink-vibrant);
+    }
+
+    .footer-bottom {
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        text-align: left;
+      }
+    }
+
+    .footer-zeno-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-text-dim);
+    }
+
+    .footer-zeno-badge a {
+      color: var(--color-pink-vibrant);
+      text-decoration: underline;
+    }
+
+    /* Floating quick listen trigger for mobile */
+    .mobile-float-bar {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .mobile-float-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 90;
+        background: rgba(14, 4, 11, 0.96);
+        border-top: 1px solid var(--color-border-pink);
+        backdrop-filter: blur(12px);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
+      }
+
+      .mobile-float-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .mobile-float-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .mobile-float-sub {
+        font-size: 0.72rem;
+        color: var(--color-pink-vibrant);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="topo">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="#topo" class="brand-logo" title="Morena Web Rádio - Página Inicial">
+        <div class="logo-symbol">
+          <!-- Radio / Wave Icon SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3a9 9 0 0 0-9 9 8.94 8.94 0 0 0 3.32 6.95L7.74 17.5A6.97 6.97 0 0 1 5 12a7 7 0 1 1 14 0c0 2.14-1 4.05-2.74 5.5l1.42 1.45A8.94 8.94 0 0 0 21 12a9 9 0 0 0-9-9zm0 4a5 5 0 0 0-5 5c0 1.5.67 2.85 1.74 3.76l1.42-1.42A2.99 2.99 0 0 1 9 12a3 3 0 1 1 6 0c0 .9-.4 1.7-1.16 2.34l1.42 1.42A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">MORENA</span>
+          <span class="brand-tag">WEB RÁDIO</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-menu">
+          <li><a href="#topo" class="nav-link active">Início</a></li>
+          <li><a href="#programacao" class="nav-link">Programação</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre</a></li>
+          <li><a href="#destaques" class="nav-link">Top Hits</a></li>
+          <li><a href="#pedir-musica" class="nav-link">Pedir Música</a></li>
+          <li><a href="#contatos" class="nav-link">Contatos</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="header-actions">
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Morena%20Web%20R%C3%A1dio!%20Estou%20ouvindo%20a%20programa%C3%A7%C3%A3o%20e%20gostaria%20de%20interagir." target="_blank" rel="noopener noreferrer" class="btn-whatsapp" title="Falar no WhatsApp">
+          <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.413Z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#topo" class="mobile-nav-link active">Início</a></li>
+        <li><a href="#programacao" class="mobile-nav-link">Programação</a></li>
+        <li><a href="#sobre" class="mobile-nav-link">Sobre a Rádio</a></li>
+        <li><a href="#destaques" class="mobile-nav-link">Top Hits da Semana</a></li>
+        <li><a href="#pedir-musica" class="mobile-nav-link">Fazer Pedido Musical</a></li>
+        <li><a href="#contatos" class="mobile-nav-link">Contatos & Redes</a></li>
+      </ul>
+      <a href="https://wa.me/5567999999999?text=Ol%C3%A1%20Morena%20Web%20R%C3%A1dio!" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="width: 100%; justify-content: center; padding: 12px 20px;">
+        <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: var(--color-whatsapp);">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.413Z"/>
+        </svg>
+        <span>Falar no WhatsApp com a Rádio</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION: Topo com Imagem de Fundo de Rádio & Player Embed
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-backdrop" aria-hidden="true"></div>
+      
+      <div class="container hero-content">
+        <div class="hero-grid">
+          <!-- Text Content Column -->
+          <div>
+            <div class="live-broadcast-pill">
+              <span class="pulse-dot"></span>
+              <span>Transmissão Digital HD · 24 Horas</span>
+            </div>
+            
+            <h1 class="hero-headline">
+              A rádio que toca o melhor do <span class="highlight">pop global</span>. Ouça ao vivo de qualquer lugar.
+            </h1>
+            
+            <p class="hero-description">
+              Sintonize os grandes sucessos mundiais, estreias exclusivas, os clássicos que marcaram gerações e uma curadoria que não repete as mesmas faixas. Experiência de áudio cristalina em qualquer dispositivo.
+            </p>
+            
+            <div class="hero-cta-group">
+              <a href="#player-ao-vivo" class="btn-primary" id="btnScrollPlayer">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <span>Ouvir Transmissão</span>
+              </a>
+              <a href="#pedir-musica" class="btn-secondary">
+                <span>Pedir Minha Música</span>
+              </a>
+            </div>
+
+            <div class="hero-badges">
+              <div class="hero-badge-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% Gratuito</span>
+              </div>
+              <div class="hero-badge-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Som HD 320 kbps</span>
+              </div>
+              <div class="hero-badge-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sem cortes ou travamentos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Integrated Live Player Column (Requested Zeno.fm embed) -->
+          <div id="player-ao-vivo">
+            <div class="player-card-container">
+              <div class="player-card-header">
+                <div class="player-card-title">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                  </svg>
+                  <span>Morena Player Ao Vivo</span>
+                </div>
+                
+                <div class="equalizer-anim" aria-label="Equalizador gráfico de áudio">
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                </div>
+              </div>
+
+              <!-- EXACT USER EMBED CODE WRAPPED SAFELY FOR MOBILE RESPONSIVENESS -->
+              <div class="player-embed-wrapper">
+                <iframe src="https://zeno.fm/player/morena-web-radio" width="575" height="250" frameborder="0" scrolling="no" title="Player Morena Web Rádio no Zeno.FM"></iframe>
+                <a href="https://zeno.fm/" target="_blank" rel="noopener noreferrer" style="display: block; font-size: 0.9em; line-height: 10px;">A Zeno.FM Station</a>
+              </div>
+
+              <div class="player-extra-bar">
+                <div>Status: <span class="status-text-highlight" id="liveScheduleTitle">Ao Vivo · Pop Global 24h</span></div>
+                <div>Servidor: <span style="color: #ffffff;">Estável HD</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROGRAMAÇÃO SECTION (Grade de Programas)
+         ========================================================================== -->
+    <section class="section-spacing" id="programacao">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Grade Completa</span>
+          <h2 class="section-title">Programação Feita Para Você</h2>
+          <p class="section-subtitle">
+            Cada horário tem uma atmosfera pensada especialmente no seu ritmo diário, com a melhor seleção pop internacional.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="program-tabs">
+          <button class="tab-btn active" data-filter="all">Toda a Semana</button>
+          <button class="tab-btn" data-filter="weekdays">Segunda a Sexta</button>
+          <button class="tab-btn" data-filter="weekend">Sábado e Domingo</button>
+        </div>
+
+        <!-- Schedule Cards Grid -->
+        <div class="schedule-grid" id="scheduleGrid">
+          <!-- Card 1 -->
+          <article class="program-card" data-category="weekdays">
+            <div class="program-header">
+              <span class="program-time">06:00 — 09:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Despertar Pop</h3>
+            <p class="program-desc">
+              Comece o dia com alto astral e energia! As músicas mais vibrantes do pop global, lançamentos matinais e o resumo das principais novidades da música mundial.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Apresentação: Equipe Morena
+              </span>
+              <span>Seg a Sex</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="program-card" data-category="weekdays">
+            <div class="program-header">
+              <span class="program-time">09:00 — 12:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Top Hits Global</h3>
+            <p class="program-desc">
+              A contagem definitiva dos maiores sucessos que dominam as paradas dos Estados Unidos, Europa e América Latina. Só as faixas em #1!
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                DJ Residente
+              </span>
+              <span>Seg a Sex</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="program-card is-live" data-category="all">
+            <div class="program-header">
+              <span class="program-time">12:00 — 15:00</span>
+              <span class="program-badge-live">No Ar Agora</span>
+            </div>
+            <h3 class="program-title">Conexão Morena</h3>
+            <p class="program-desc">
+              O espaço onde os ouvintes mandam na rádio! Toca os pedidos musicais recebidos pelo site e WhatsApp com recados e dedicatórias ao vivo.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Interatividade Total
+              </span>
+              <span>Diariamente</span>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="program-card" data-category="weekdays">
+            <div class="program-header">
+              <span class="program-time">15:00 — 18:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Tarde Pop & Dance</h3>
+            <p class="program-desc">
+              Para acelerar o ritmo da sua tarde! Pop contemporâneo com batidas eletrizantes, remixes oficiais e o que há de mais moderno na cena dance internacional.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Curadoria Pop Global
+              </span>
+              <span>Seg a Sex</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="program-card" data-category="all">
+            <div class="program-header">
+              <span class="program-time">18:00 — 21:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Top 20 Global Countdown</h3>
+            <p class="program-desc">
+              O ranking oficial com as vinte músicas mais tocadas e pedidas da semana. Curiosidades de bastidores dos artistas e grandes clássicos pop.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Locução Especial
+              </span>
+              <span>Diariamente</span>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="program-card" data-category="all">
+            <div class="program-header">
+              <span class="program-time">21:00 — 00:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Night Pop Sessions</h3>
+            <p class="program-desc">
+              Sessões intimistas, pop acústico, versões desplugadas e as melhores baladas pop para fechar o seu dia com estilo e relaxamento.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Madrugada Pop
+              </span>
+              <span>Diariamente</span>
+            </div>
+          </article>
+
+          <!-- Card 7 (Fim de semana) -->
+          <article class="program-card" data-category="weekend">
+            <div class="program-header">
+              <span class="program-time">14:00 — 18:00</span>
+              <span class="program-badge-live" style="display: none;">No Ar</span>
+            </div>
+            <h3 class="program-title">Morena Weekend Party</h3>
+            <p class="program-desc">
+              A trilha sonora perfeita para animar seu churrasco, piscina ou viagem. Sets contínuos sem intervalos, com os melhores remixes do pop.
+            </p>
+            <div class="program-meta">
+              <span class="program-host">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Sets Exclusivos
+              </span>
+              <span>Sáb e Dom</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SOBRE SECTION (História, Missão & Pilares)
+         ========================================================================== -->
+    <section class="section-spacing" id="sobre" style="background: rgba(10, 2, 8, 0.5);">
+      <div class="container">
+        <div class="about-grid">
+          <!-- Text and Mission -->
+          <div class="about-card-panel">
+            <span class="section-kicker">Institucional</span>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">
+              A Paixão pelo Pop que Conecta o Mundo
+            </h2>
+            <p class="about-lead">
+              A Morena Web Rádio nasceu com uma proposta ousada: oferecer aos apaixonados por música uma estação moderna, sem excesso de comerciais e com curadoria de nível internacional.
+            </p>
+            <p class="about-text">
+              Transmitindo 24 horas por dia, 7 dias por semana através da avançada rede global Zeno Media, levamos o melhor do pop mundial para ouvintes em qualquer cidade do Brasil e do mundo, direto no seu celular, computador ou caixa de som inteligente.
+            </p>
+            <p class="about-text">
+              Valorizamos a sua opinião: aqui, cada ouvinte tem voz ativa via WhatsApp e pelo nosso portal para sugerir faixas, participar de enquetes e ditar a programação.
+            </p>
+
+            <div class="about-stats-grid">
+              <div class="stat-box">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">No Ar sem Interrupção</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">+50k</div>
+                <div class="stat-label">Ouvintes Mensais</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Curadoria Humanizada</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">HD</div>
+                <div class="stat-label">Áudio de Alta Fidelidade</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quality Pillars -->
+          <div class="about-pillars">
+            <div class="pillar-card">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="pillar-title">Curadoria Musical de Excelência</h3>
+                <p class="pillar-desc">
+                  Pesquisamos lançamentos diários nos maiores centros musicais de Los Angeles, Londres, Seul e São Paulo para garantir uma programação sempre fresca e sofisticada.
+                </p>
+              </div>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="pillar-title">Transmissão Robusta e Confiável</h3>
+                <p class="pillar-desc">
+                  Infraestrutura de servidores com baixa latência e compressão adaptativa para que a transmissão continue estável mesmo em conexões de internet móvel 3G/4G/5G.
+                </p>
+              </div>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="pillar-title">Comunidade e Interatividade</h3>
+                <p class="pillar-desc">
+                  Nosso time de produção lê suas mensagens e atende aos pedidos musicais. Você faz parte da família Morena Web Rádio onde quer que esteja.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TOP 5 POP GLOBAL (Músicas em Destaque)
+         ========================================================================== -->
+    <section class="section-spacing" id="destaques">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Ranking Semanal</span>
+          <h2 class="section-title">Top 5 Mais Pedidas no Pop Global</h2>
+          <p class="section-subtitle">
+            As músicas que não saem dos fones dos nossos ouvintes. Vote na sua favorita para mantê-la no topo!
+          </p>
+        </div>
+
+        <div class="top-tracks-list" id="trackList">
+          <!-- Item 1 -->
+          <div class="track-card">
+            <div class="track-left">
+              <div class="track-rank">1</div>
+              <div class="track-info">
+                <span class="track-name">Die With A Smile</span>
+                <span class="track-artist">Lady Gaga & Bruno Mars</span>
+              </div>
+            </div>
+            <div class="track-actions">
+              <button class="btn-vote" data-song="Lady Gaga & Bruno Mars - Die With A Smile" title="Votar nesta faixa">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="vote-count">1.480</span> votos
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="track-card">
+            <div class="track-left">
+              <div class="track-rank">2</div>
+              <div class="track-info">
+                <span class="track-name">Birds of a Feather</span>
+                <span class="track-artist">Billie Eilish</span>
+              </div>
+            </div>
+            <div class="track-actions">
+              <button class="btn-vote" data-song="Billie Eilish - Birds of a Feather" title="Votar nesta faixa">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="vote-count">1.320</span> votos
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="track-card">
+            <div class="track-left">
+              <div class="track-rank">3</div>
+              <div class="track-info">
+                <span class="track-name">Espresso</span>
+                <span class="track-artist">Sabrina Carpenter</span>
+              </div>
+            </div>
+            <div class="track-actions">
+              <button class="btn-vote" data-song="Sabrina Carpenter - Espresso" title="Votar nesta faixa">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="vote-count">1.190</span> votos
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="track-card">
+            <div class="track-left">
+              <div class="track-rank">4</div>
+              <div class="track-info">
+                <span class="track-name">Houdini</span>
+                <span class="track-artist">Dua Lipa</span>
+              </div>
+            </div>
+            <div class="track-actions">
+              <button class="btn-vote" data-song="Dua Lipa - Houdini" title="Votar nesta faixa">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="vote-count">1.045</span> votos
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="track-card">
+            <div class="track-left">
+              <div class="track-rank">5</div>
+              <div class="track-info">
+                <span class="track-name">Dancing in the Flames</span>
+                <span class="track-artist">The Weeknd</span>
+              </div>
+            </div>
+            <div class="track-actions">
+              <button class="btn-vote" data-song="The Weeknd - Dancing in the Flames" title="Votar nesta faixa">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="vote-count">980</span> votos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PEDIR MÚSICA SECTION (Formulário Interativo com WhatsApp)
+         ========================================================================== -->
+    <section class="section-spacing" id="pedir-musica">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Interatividade do Ouvinte</span>
+          <h2 class="section-title">Peça Sua Música Favorita</h2>
+          <p class="section-subtitle">
+            Envie agora mesmo a canção que você quer ouvir na Morena Web Rádio e ela tocará no programa Conexão Morena!
+          </p>
+        </div>
+
+        <div class="request-section-card">
+          <form id="musicRequestForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="reqName" class="form-label">Seu Nome / Apelido *</label>
+                <input type="text" id="reqName" class="form-input" placeholder="Ex: Camila Silva" required>
+              </div>
+
+              <div class="form-group">
+                <label for="reqCity" class="form-label">Sua Cidade / Estado *</label>
+                <input type="text" id="reqCity" class="form-input" placeholder="Ex: Campo Grande - MS" required>
+              </div>
+
+              <div class="form-group">
+                <label for="reqSong" class="form-label">Nome da Música *</label>
+                <input type="text" id="reqSong" class="form-input" placeholder="Ex: Flowers" required>
+              </div>
+
+              <div class="form-group">
+                <label for="reqArtist" class="form-label">Artista / Banda *</label>
+                <input type="text" id="reqArtist" class="form-input" placeholder="Ex: Miley Cyrus" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="reqMessage" class="form-label">Recado Especial ou Dedicatória (Opcional)</label>
+                <textarea id="reqMessage" class="form-textarea" placeholder="Mande um abraço para amigos, familiares ou dedique para alguém especial..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn-primary" style="padding: 13px 26px;">
+                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                <span>Enviar Pedido pelo Site</span>
+              </button>
+
+              <button type="button" class="btn-whatsapp" id="btnSendViaWhatsApp" style="padding: 13px 22px;">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.413Z"/>
+                </svg>
+                <span>Enviar pelo WhatsApp</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTATOS SECTION
+         ========================================================================== -->
+    <section class="section-spacing" id="contatos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Fale Conosco</span>
+          <h2 class="section-title">Canais Oficiais de Contato</h2>
+          <p class="section-subtitle">
+            Estamos prontos para ouvir sua mensagem, sugestão ou proposta de parceria comercial.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- WhatsApp Card -->
+          <div class="contact-card">
+            <div class="contact-icon-wrap" style="color: var(--color-whatsapp); border-color: rgba(37, 211, 102, 0.4); background: rgba(37, 211, 102, 0.1);">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.48-8.413Z"/>
+              </svg>
+            </div>
+            <h3 class="contact-card-title">WhatsApp Oficial</h3>
+            <p class="contact-card-text">
+              Envie áudios, mensagens, participe de promoções e fale diretamente com nossa produção.
+            </p>
+            <a href="https://wa.me/5567999999999?text=Ol%C3%A1%2C%20Morena%20Web%20R%C3%A1dio!" target="_blank" rel="noopener noreferrer" class="contact-btn-link">
+              <span>(67) 99999-9999</span>
+              <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+            </a>
+          </div>
+
+          <!-- Email Card -->
+          <div class="contact-card">
+            <div class="contact-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <h3 class="contact-card-title">E-mail Comercial</h3>
+            <p class="contact-card-text">
+              Para divulgação de artistas, publicidade, patrocínios institucionais e parcerias.
+            </p>
+            <a href="mailto:contato@morenawebradio.com.br" class="contact-btn-link">
+              <span>contato@morenawebradio.com.br</span>
+              <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+            </a>
+          </div>
+
+          <!-- Redes Sociais Card -->
+          <div class="contact-card">
+            <div class="contact-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+            <h3 class="contact-card-title">Redes Sociais</h3>
+            <p class="contact-card-text">
+              Acompanhe novidades, bastidores das gravações, enquetes musicais e promoções no Instagram.
+            </p>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="contact-btn-link">
+              <span>@morenawebradio</span>
+              <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       RODAPÉ (Footer)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand Info -->
+        <div>
+          <a href="#topo" class="brand-logo">
+            <div class="logo-symbol">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3a9 9 0 0 0-9 9 8.94 8.94 0 0 0 3.32 6.95L7.74 17.5A6.97 6.97 0 0 1 5 12a7 7 0 1 1 14 0c0 2.14-1 4.05-2.74 5.5l1.42 1.45A8.94 8.94 0 0 0 21 12a9 9 0 0 0-9-9zm0 4a5 5 0 0 0-5 5c0 1.5.67 2.85 1.74 3.76l1.42-1.42A2.99 2.99 0 0 1 9 12a3 3 0 1 1 6 0c0 .9-.4 1.7-1.16 2.34l1.42 1.42A4.97 4.97 0 0 0 17 12a5 5 0 0 0-5-5zm0 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+              </svg>
+            </div>
+            <div class="brand-text-wrap">
+              <span class="brand-name">MORENA</span>
+              <span class="brand-tag">WEB RÁDIO</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            A rádio que toca o melhor do pop global. Transmissão contínua em alta fidelidade para conectar você com os grandes sucessos do planeta.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-heading">Navegação</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#topo" class="footer-nav-link">Início</a></li>
+            <li><a href="#programacao" class="footer-nav-link">Grade de Programação</a></li>
+            <li><a href="#sobre" class="footer-nav-link">Sobre a Estação</a></li>
+            <li><a href="#destaques" class="footer-nav-link">Top 5 Pop Global</a></li>
+            <li><a href="#pedir-musica" class="footer-nav-link">Fazer Pedido</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Audio Quality -->
+        <div>
+          <h4 class="footer-heading">Transmissão</h4>
+          <ul class="footer-nav-list">
+            <li><span class="footer-nav-link">Streaming Zeno Media CDN</span></li>
+            <li><span class="footer-nav-link">Qualidade: AAC+ 320kbps</span></li>
+            <li><span class="footer-nav-link">Compatível: Web / Android / iOS</span></li>
+            <li><a href="#contatos" class="footer-nav-link">Contato e Imprensa</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright Bar -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 <strong>Morena Web Rádio</strong>. Todos os direitos reservados.
+        </div>
+        <div class="footer-zeno-badge">
+          <span>Transmissão Oficial:</span>
+          <a href="https://zeno.fm/morena-web-radio" target="_blank" rel="noopener noreferrer">A Zeno.FM Station</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Mobile Quick Listen Action -->
+  <aside class="mobile-float-bar" aria-label="Acesso Rápido ao Player">
+    <div class="mobile-float-left">
+      <div class="pulse-dot"></div>
+      <div>
+        <div class="mobile-float-title">Morena Web Rádio</div>
+        <div class="mobile-float-sub">Ao Vivo · Pop Global</div>
+      </div>
+    </div>
+    <a href="#player-ao-vivo" class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">
+      <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M8 5v14l11-7z"/></svg>
+      <span>Ouvir</span>
+    </a>
+  </aside>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast-notice" id="toastNotice" role="alert" aria-live="polite">
+    <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: var(--color-pink-vibrant);"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    <span id="toastMessage">Operação realizada com sucesso!</span>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT EMBUTIDO (Vanilla JS Moderno)
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (menuToggle && mobileDrawer) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('open');
+          mobileDrawer.classList.toggle('open');
+        });
+
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('open');
+            mobileDrawer.classList.remove('open');
+          });
+        });
+      }
+
+      // 2. Smooth Scroll & Active Nav Spy
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id], header[id]');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollPosition = window.scrollY + 120;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // 3. Program Schedule Tabs Filter
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const programCards = document.querySelectorAll('.program-card');
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          programCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === 'all' || category === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 4. Toast Notification Helper
+      const toast = document.getElementById('toastNotice');
+      const toastMsg = document.getElementById('toastMessage');
+      let toastTimeout;
+
+      function showToast(message) {
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = message;
+        toast.style.display = 'flex';
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.style.display = 'none';
+        }, 4000);
+      }
+
+      // 5. Interactive Top 5 Voting
+      const voteButtons = document.querySelectorAll('.btn-vote');
+      voteButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const countSpan = btn.querySelector('.vote-count');
+          const songName = btn.getAttribute('data-song');
+          if (countSpan) {
+            let currentVotes = parseInt(countSpan.textContent.replace('.', ''), 10);
+            if (!isNaN(currentVotes)) {
+              currentVotes++;
+              countSpan.textContent = currentVotes.toLocaleString('pt-BR');
+              btn.style.borderColor = 'var(--color-pink-vibrant)';
+              btn.style.color = 'var(--color-pink-vibrant)';
+              showToast(`Voto registrado com sucesso para "${songName}"!`);
+            }
+          }
+        });
+      });
+
+      // 6. Music Request Form Submission
+      const musicForm = document.getElementById('musicRequestForm');
+      const btnWhatsApp = document.getElementById('btnSendViaWhatsApp');
+
+      if (musicForm) {
+        musicForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('reqName').value.trim();
+          const city = document.getElementById('reqCity').value.trim();
+          const song = document.getElementById('reqSong').value.trim();
+          const artist = document.getElementById('reqArtist').value.trim();
+          const message = document.getElementById('reqMessage').value.trim();
+
+          showToast(`Obrigado, ${name}! Seu pedido de "${song} - ${artist}" foi enviado para a produção da Morena Web Rádio.`);
+          musicForm.reset();
+        });
+      }
+
+      // Send Request via WhatsApp Button
+      if (btnWhatsApp) {
+        btnWhatsApp.addEventListener('click', () => {
+          const name = document.getElementById('reqName').value.trim();
+          const city = document.getElementById('reqCity').value.trim();
+          const song = document.getElementById('reqSong').value.trim();
+          const artist = document.getElementById('reqArtist').value.trim();
+          const message = document.getElementById('reqMessage').value.trim();
+
+          let text = `*Pedido Musical - Morena Web Rádio*%0A`;
+          if (name) text += `*Nome:* ${encodeURIComponent(name)}%0A`;
+          if (city) text += `*Cidade:* ${encodeURIComponent(city)}%0A`;
+          if (song) text += `*Música:* ${encodeURIComponent(song)}%0A`;
+          if (artist) text += `*Artista:* ${encodeURIComponent(artist)}%0A`;
+          if (message) text += `*Recado:* ${encodeURIComponent(message)}%0A`;
+
+          if (!song && !artist) {
+            text += `Gostaria de pedir uma música na programação!`;
+          }
+
+          const whatsappUrl = `https://wa.me/5567999999999?text=${text}`;
+          window.open(whatsappUrl, '_blank');
+        });
+      }
+
+      // 7. Dynamic "No Ar Agora" Schedule highlight based on current time
+      function updateLiveStatus() {
+        const now = new Date();
+        const hour = now.getHours();
+        const liveTitle = document.getElementById('liveScheduleTitle');
+
+        let currentProgramName = 'Pop Global 24h';
+        if (hour >= 6 && hour < 9) {
+          currentProgramName = 'Despertar Pop';
+        } else if (hour >= 9 && hour < 12) {
+          currentProgramName = 'Top Hits Global';
+        } else if (hour >= 12 && hour < 15) {
+          currentProgramName = 'Conexão Morena (Ao Vivo)';
+        } else if (hour >= 15 && hour < 18) {
+          currentProgramName = 'Tarde Pop & Dance';
+        } else if (hour >= 18 && hour < 21) {
+          currentProgramName = 'Top 20 Global Countdown';
+        } else if (hour >= 21 && hour < 24) {
+          currentProgramName = 'Night Pop Sessions';
+        } else {
+          currentProgramName = 'Madrugada Morena Non-Stop';
+        }
+
+        if (liveTitle) {
+          liveTitle.textContent = `Ao Vivo · ${currentProgramName}`;
+        }
+      }
+
+      updateLiveStatus();
+      setInterval(updateLiveStatus, 60000);
+    });
+  </script>
+</body>
+</html>
